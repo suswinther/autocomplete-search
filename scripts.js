@@ -3,6 +3,7 @@ const requestUrl = 'https://api.recordedfuture.com/query/'
 const results = document.getElementById('results')
 const p = document.getElementById('message')
 var request = new XMLHttpRequest()
+var value = ''
 var body = {
     from: 'entity',
     where: {
@@ -16,8 +17,9 @@ var body = {
 searchByValue = function () {
     p.textContent = ''
     results.innerHTML = ''
-    var value = document.getElementById('searchCriteria').value
+    value = document.getElementById('searchCriteria').value.toLowerCase()
     if (value) {
+        // Abort request if there is one in the process already and/or send a new one
         if (requestInProcess) {
             request.onabort = function () {
                 requestInProcess = false
@@ -30,16 +32,16 @@ searchByValue = function () {
     }
 }
 sendNewRequest = function () {
-    body.where.name.text = document.getElementById('searchCriteria').value
-    request.open('POST', requestUrl, true)
     requestInProcess = true
+    body.where.name.text = value
+    request.open('POST', requestUrl, true)
     request.onload = function () {
         requestInProcess = false
         if (request.status >= 200 && request.status < 400) {
-            var data = JSON.parse(this.response)
-            console.log('data: ', data);
+            let data = JSON.parse(this.response)
             if (data.result.count > 0) {
                 data.result.items.forEach(result => {
+                    //Create a card for each result
                     const card = document.createElement('div')
                     card.setAttribute('class', 'search-card')
                     const type = document.createElement('type')
@@ -48,30 +50,41 @@ sendNewRequest = function () {
                     const info = document.createElement('div')
                     info.setAttribute('class', 'info')
                     if (result.attributes) {
+                        if (result.attributes.name) {
+                            const name = document.createElement('p')
+                            const resultName = result.attributes.name
+                            let regex = new RegExp(value, 'gi')
+                            let replacedString = resultName.replace(regex, (str) => '<b>' + str + '</b>')
+                            name.innerHTML = 'Name: ' + replacedString
+                            info.appendChild(name)
+                        }
                         if (result.attributes.created) {
                             const created = document.createElement('p')
-                            var date = new Date(result.attributes.created)
+                            let date = new Date(result.attributes.created)
                             date = date.toISOString().substring(0, 10)
                             created.innerHTML = 'Created: ' + date
                             info.appendChild(created)
                         }
                         if (result.attributes.modified) {
                             const modified = document.createElement('p')
-                            var date = new Date(result.attributes.modified)
+                            let date = new Date(result.attributes.modified)
                             date = date.toISOString().substring(0, 10)
                             modified.innerHTML = 'Modified: ' + date
                             info.appendChild(modified)
+                        }
+                        if (result.attributes.hits) {
+                            const hits = document.createElement('p')
+                            hits.innerHTML = '<i>Hits: ' + result.attributes.hits + '</i>'
+                            info.appendChild(hits)
                         }
                     }
                     results.appendChild(card)
                     card.appendChild(type)
                     card.appendChild(info)
                 })
-
             } else {
                 p.innerHTML = 'No results'
             }
-
         } else {
             p.classList.add('error')
             p.textContent = 'Something went wrong, please try again.'

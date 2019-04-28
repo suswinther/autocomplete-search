@@ -72,9 +72,9 @@ input[type='text']:focus {
     background-color: #FF7800;
 }
 
-.person, .city, .company, .country {
+.person, .city, .company, .organization, .country, .provinceorstate, .neighborhood, .region, .product, .militarybase {
     background-color: #2400D4;
-    color: #d7d7d7;
+    color: white;
 }
 
 .username, .emailaddress {
@@ -83,4 +83,9 @@ input[type='text']:focus {
 
 .malwaresignature, .malwarecategory {
     background-color: #f80022;
+}
+
+.industryterm, .technology, .hashtag, .filename {
+    background-color: #cf00cf;
+    color: white;
 }
