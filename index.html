@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autocomplete search</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="root">
+        <h1>Recorded Future</h1>
+        <form autocomplete="off">
+            <div class="autocomplete">
+                <input aria-label="Type to search" id="searchCriteria" type="text" name="searchAutoComplete"
+                    placeholder="Type to search" oninput="searchByValue()">
+            </div>
+        </form>
+        <p id="message"></p>
+        <div id="results">
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="scripts.js"></script>
+</body>
+
+</html>

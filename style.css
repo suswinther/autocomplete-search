@@ -1,0 +1,86 @@
+body {
+    font-family: "Open Sans";
+    background-color: #0071ce;
+}
+
+#root {
+    width: 900px;
+    margin: 30px auto;
+    background-color: #f7f7f7;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 20px 0 0 0;
+}
+
+p {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+}
+
+.error {
+    color: red;
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+input[type='text'] {
+    font-family: inherit;
+    height: 60px;
+    font-size: 16px;
+    width: 400px;
+    padding-left: 10px;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    border: 2px solid#0071ce;
+    background-color: white;
+}
+
+input[type='text']:focus {
+    box-shadow: 0 2px 12px 0#0071ce;
+    outline: none;
+}
+
+.search-card {
+    width: 80%;
+    border: 1px solid #808080;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px auto;
+    background-color: white;
+}
+
+.info {
+    margin-top: 10px;
+}
+
+/* types */
+
+.type {
+    border-radius: 50px;
+    padding: 5px 20px;
+    color: #101010;
+    background-color: #FF7800;
+}
+
+.person, .city, .company, .country {
+    background-color: #2400D4;
+    color: #d7d7d7;
+}
+
+.username, .emailaddress {
+    background-color: #00d75e;
+}
+
+.malwaresignature, .malwarecategory {
+    background-color: #f80022;
+}
