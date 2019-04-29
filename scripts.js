@@ -2,7 +2,7 @@ var requestInProcess = false
 const requestUrl = 'https://api.recordedfuture.com/query/'
 const results = document.getElementById('results')
 const message = document.getElementById('message')
-const spinner = document.getElementById("spinner")
+const spinner = document.getElementById('spinner')
 spinner.style.display = 'none'
 const request = new XMLHttpRequest()
 var value = ''
@@ -34,12 +34,12 @@ searchByValue = function () {
     }
 }
 sendNewRequest = function () {
-    spinner.style.display = "block";
+    spinner.style.display = 'block'
     requestInProcess = true
     body.where.name.text = value
     request.open('POST', requestUrl, true)
     request.onload = function () {
-        spinner.style.display = "none";
+        spinner.style.display = 'none'
         requestInProcess = false
         if (request.status >= 200 && request.status < 400) {
             let data = JSON.parse(this.response)
