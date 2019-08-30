@@ -14,7 +14,7 @@ const body = {
         }
     },
     limit: 10,
-    token: '99df4c56d4a84cfc9794ff731a98da33'
+    token: ''
 }
 searchByValue = function () {
     message.textContent = ''
